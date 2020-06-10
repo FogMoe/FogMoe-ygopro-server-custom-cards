@@ -53,39 +53,22 @@ function c99936304.atktg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	e:SetLabelObject(g2:GetFirst())
 end
 function c99936304.atkop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
-	if g:GetCount()==2 then
-	local c1=g:GetFirst()
-	local c2=g:GetNext()
-	if c1:IsFaceup() and c1:IsRelateToEffect(e) and c2:IsFaceup() and c2:IsRelateToEffect(e) then
-		local atk=c1:GetAttack()
+	local hc=e:GetLabelObject()
+	local g=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
+	local tc=g:GetFirst()
+	if tc==hc then tc=g:GetNext() end
+	if hc:IsRelateToEffect(e) and hc:IsFaceup() then
+		local atk=hc:GetAttack()
 		local e1=Effect.CreateEffect(e:GetHandler())
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_SET_ATTACK_FINAL)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e1:SetValue(atk/2)
-		if c1:RegisterEffect(e1) then
-			local e2=Effect.CreateEffect(e:GetHandler())
-			e2:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetValue(math.ceil(atk/2))
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
+		hc:RegisterEffect(e1)
+		if tc:IsRelateToEffect(e) and tc:IsFaceup() then
+			local e2=e1:Clone()
 			e2:SetCode(EFFECT_UPDATE_ATTACK)
-			e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-			e2:SetValue(atk/2)
-			c2:RegisterEffect(e2)
-		end
-	end
-		local def=c1:GetDefense()
-		local e1=Effect.CreateEffect(e:GetHandler())
-		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_SET_DEFENSE_FINAL)
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-		e1:SetValue(def/2)
-		if c1:RegisterEffect(e1) then
-			local e2=Effect.CreateEffect(e:GetHandler())
-			e2:SetType(EFFECT_TYPE_SINGLE)
-			e2:SetCode(EFFECT_UPDATE_DEFENSE)
-			e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-			e2:SetValue(def/2)
-			c2:RegisterEffect(e2)
+			tc:RegisterEffect(e2)
 		end
 	end
 end
