@@ -1,6 +1,6 @@
 --猫和老鼠-Tom and Jerry
 function c55790000.initial_effect(c)
-	aux.AddSynchroProcedure(c,nil,aux.NonTuner(Card.IsAttribute,ATTRIBUTE_EARTH),1)
+	aux.AddSynchroProcedure(c,nil,aux.NonTuner(Card.IsSetCard,0xaa0),1)
 	c:EnableReviveLimit()
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_SINGLE)
@@ -64,3 +64,4 @@ end
 function c55790000.atkval(e)
 	return Duel.GetMatchingGroupCount(Card.IsType,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,TYPE_SPELL+TYPE_TRAP)*150
 end
+

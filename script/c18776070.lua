@@ -16,7 +16,7 @@ function c18776070.initial_effect(c)
 	--atkup
 	local e33=Effect.CreateEffect(c)
 	e33:SetType(EFFECT_TYPE_FIELD)
-	e33:SetCode(EFFECT_UPDATE_ATTACK+EFFECT_UPDATE_DEFENSE)
+	e33:SetCode(EFFECT_UPDATE_ATTACK)
 	e33:SetRange(LOCATION_SZONE)
 	e33:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
 	e33:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0xaa0))
@@ -27,7 +27,7 @@ function c18776070.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_SINGLE)
 	e4:SetCode(EFFECT_DESTROY_REPLACE)
 	e4:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e4:SetRange(LOCATION_FZONE)
+	e4:SetRange(LOCATION_SZONE)
 	e4:SetTarget(c18776070.desreptg)
 	e4:SetOperation(c18776070.desrepop)
 	c:RegisterEffect(e4)
@@ -75,3 +75,4 @@ end
 function c18776070.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RemoveCounter(ep,0x66a,3,REASON_EFFECT)
 end
+
