@@ -41,7 +41,7 @@ function c99904008.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(c,REASON_COST)
 end
 function c99904008.setfilter(c)
-	return not c:IsCode(99904008) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0x343) and c:IsSSetable()
+	return not (c:IsType(TYPE_CONTINUOUS) and c:IsType(TYPE_TRAP)) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSetCard(0x343) and c:IsSSetable(ignore)
 end
 function c99904008.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c99904008.setfilter,tp,LOCATION_DECK,0,1,nil) end
