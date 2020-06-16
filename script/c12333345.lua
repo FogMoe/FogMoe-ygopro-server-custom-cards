@@ -19,13 +19,7 @@ function c12333345.initial_effect(c)
 	e1:SetTarget(c12333345.sptg)
 	e1:SetOperation(c12333345.spop)
 	c:RegisterEffect(e1)
-	local e12=Effect.CreateEffect(c)
-	e12:SetType(EFFECT_TYPE_SINGLE)
-	e12:SetCode(EFFECT_UPDATE_ATTACK)
-	e12:SetRange(LOCATION_MZONE)
-	e12:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	e12:SetValue(c12333345.atkval)
-	c:RegisterEffect(e12)
+   
 end
 function c12333345.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetDecktopGroup(tp,3)
@@ -42,7 +36,6 @@ function c12333345.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) then
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
-	end
 end
 function c12333345.desop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
@@ -60,7 +53,5 @@ function c12333345.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c12333345.splimit(e,c)
 	return not c:IsRace(RACE_BEAST)
-end
-function c12333345.atkval(e)
-	return Duel.GetMatchingGroupCount(Card.IsType,e:GetHandlerPlayer(),LOCATION_GRAVE,0,nil,TYPE_SPELL+TYPE_TRAP)*100
+	end
 end
