@@ -71,12 +71,12 @@ function c14370001.indtg(e,c)
 end
 --e5
 function c14370001.costfilter(c)
-	return c:IsSetCard(0x1437) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)) and c:IsType(TYPE_CONTINUOUS) and (c:IsFaceup() or not c:IsLocation(LOCATION_SZONE)) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x1437) and (c:IsFaceup() or not c:IsLocation(LOCATION_ONFIELD)) and c:IsAbleToGraveAsCost()
 end
 function c14370001.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c14370001.costfilter,tp,LOCATION_HAND+LOCATION_SZONE,0,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingMatchingCard(c14370001.costfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,c14370001.costfilter,tp,LOCATION_HAND+LOCATION_SZONE,0,1,1,e:GetHandler())
+	local g=Duel.SelectMatchingCard(tp,c14370001.costfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,e:GetHandler())
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function c14370001.thfilter1(c)

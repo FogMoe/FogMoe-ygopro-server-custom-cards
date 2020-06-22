@@ -64,17 +64,13 @@ function c14370040.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
 end
 function c14370040.negop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetFieldGroup(tp,0,LOCATION_HAND)
-	 Duel.NegateActivation(ev)
-		if g:GetCount()>0
-		and Duel.IsExistingMatchingCard(c14370040.thfilter1,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil)
-		and Duel.SelectYesNo(tp,aux.Stringid(14370040,2)) then
-		Duel.BreakEffect()
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	   local g=Duel.SelectMatchingCard(tp,c14370040.thfilter1,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
-		 if g:GetCount()>0 then
-		  Duel.SendtoHand(g,nil,REASON_EFFECT)
-		  Duel.ConfirmCards(1-tp,g)
-		 end
+	if Duel.NegateActivation(ev)~=0 then
+		local g=Duel.GetMatchingGroup(c14370040.thfilter1,tp,LOCATION_DECK+LOCATION_REMOVED,0,nil)
+		if g:GetCount()>0 and Duel.SelectYesNo(tp,aux.Stringid(14370040,2)) then
+			Duel.BreakEffect()
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
+			local sg=g:Select(tp,1,1,nil)
+			Duel.SSet(tp,sg)
+		end
 	 end
 end

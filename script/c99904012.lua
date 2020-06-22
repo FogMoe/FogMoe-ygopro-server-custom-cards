@@ -41,12 +41,12 @@ function c99904012.disop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev) then
 		if re:IsHasType(EFFECT_TYPE_ACTIVATE) and re:GetHandler():IsRelateToEffect(re) then
 			Duel.SendtoGrave(eg,REASON_EFFECT)
-			local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_HAND,nil)
-			if g:GetCount()>0 and Duel.SelectYesNo(tp,aux.Stringid(99904012,1)) then
-				Duel.BreakEffect()
-				local sg=g:RandomSelect(tp,1)
-				Duel.SendtoGrave(sg,REASON_EFFECT)
 			end
+		local g=Duel.GetMatchingGroup(Card.IsAbleToGrave,tp,0,LOCATION_HAND,nil)
+		if g:GetCount()>0 and Duel.SelectYesNo(tp,aux.Stringid(99904012,1)) then
+			Duel.BreakEffect()
+			local sg=g:RandomSelect(tp,1)
+			Duel.SendtoGrave(sg,REASON_EFFECT)
 		end
 	end
 end
