@@ -57,7 +57,7 @@ function c18776070.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c18776070.atkval(e,c)
-	return e:GetHandler():GetCounter(0x66a)*50
+	return e:GetHandler():GetCounter(0x66a)*100
 end
 function c18776070.cfilter(c,tp)
 	return c:GetPreviousLocation()==LOCATION_DECK and c:GetPreviousControler()==tp
@@ -75,4 +75,3 @@ end
 function c18776070.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RemoveCounter(ep,0x66a,3,REASON_EFFECT)
 end
-
