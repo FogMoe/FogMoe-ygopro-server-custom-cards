@@ -51,7 +51,7 @@ function c94010.spop(e,tp,eg,ep,ev,re,r,rp,c)
 		local tep=tc:GetControler()
 		local cost=te:GetCost()
 		if cost then cost(te,tep,eg,ep,ev,re,r,rp,1) end
-		Card.AddCounter(tc,0x100e,1)
+		Card.AddCounter(tc,0x9400,1)
 		end 
 	Duel.ShuffleDeck(tp)
 	Duel.BreakEffect()

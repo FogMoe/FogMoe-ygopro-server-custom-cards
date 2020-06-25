@@ -64,5 +64,5 @@ function cm.target2(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_NEGATE,eg,1,0,0)
 end
 function cm.operation2(e,tp,eg,ep,ev,re,r,rp)
-	 Duel.NegateActivation(ev)	 
+	 Duel.NegateActivation(ev)   
 end

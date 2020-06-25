@@ -22,7 +22,7 @@ function cm.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCondition(cm.rmcon)
 	e2:SetCode(EVENT_TO_GRAVE)
-	e2:SetCountLimit(1,94090+EFFECT_COUNT_CODE_DUEL)
+	e2:SetCountLimit(1,94090)
 	e2:SetOperation(cm.rmop)
 	c:RegisterEffect(e2)
 end

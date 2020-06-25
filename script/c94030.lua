@@ -2,7 +2,7 @@ local m=94030
 local cm=_G["c"..m]
 cm.name="真理"
 function cm.initial_effect(c)
-	c:EnableCounterPermit(0x100e,LOCATION_SZONE)
+	c:EnableCounterPermit(0x9400,LOCATION_SZONE)
 		--Activate
 	local e9=Effect.CreateEffect(c)
 	e9:SetType(EFFECT_TYPE_ACTIVATE)
@@ -82,8 +82,8 @@ function cm.activate4(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function cm.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x100e,1,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,0x100e,1,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x9400,1,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x9400,1,REASON_COST)
 end
 function cm.target1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsSetCard(0x9400) end
