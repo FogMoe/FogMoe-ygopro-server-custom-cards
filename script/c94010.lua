@@ -16,12 +16,10 @@ function cm.initial_effect(c)
 end
 
 function c94010.spfilter1(c,tp)
-	tp=c:GetControler()
 	return c:IsLocation(LOCATION_MZONE+LOCATION_HAND) and c:IsReleasable() and c:IsType(TYPE_MONSTER)
-		and Duel.IsExistingMatchingCard(c94010.spfilter2,tp,LOCATION_MZONE+LOCATION_HAND,0,1,c)
 end
 function c94010.spfilter2(c)
-	return c:IsLocation(LOCATION_MZONE+LOCATION_HAND) and c:IsReleasable() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0x9400)
+	return c:IsReleasable() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0x9400)
 end
 function c94010.thfilter(c,tp)
 	return c:IsCode(94030)
@@ -39,7 +37,7 @@ function c94010.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c94010.thfilter,tp,LOCATION_DECK,0,1,nil,tp) end
 end
 function c94010.spcon(e,tp)
-	return Duel.IsExistingMatchingCard(c94010.spfilter1,tp,LOCATION_MZONE+LOCATION_HAND,0,3,nil,tp)
+	return Duel.GetLocationCount(tp,LOCATION_SZONE)>1 and Duel.IsExistingMatchingCard(c94010.spfilter2,tp,LOCATION_MZONE+LOCATION_HAND,0,1,c) and Duel.CheckReleaseGroupEx(tp,c94010.spfilter1,3,nil) 
 end
 function c94010.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPERATECARD)
