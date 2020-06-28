@@ -33,7 +33,7 @@ function c9980212.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c9980212.matfilter(c)
-	return ((c:IsLinkType(TYPE_NORMAL) and c:IsLinkRace(RACE_CYBERSE)) or c:IsLinkSetCard(0xba8)) and not c:IsLinkType(TYPE_TOKEN)
+	return ((c:IsLinkType(TYPE_NORMAL) and c:IsLinkRace(RACE_CYBERSE)) or c:IsLinkSetCard(0xbc8)) and not c:IsLinkType(TYPE_TOKEN)
 end
 function c9980212.spcon1(e,tp,eg,ep,ev,re,r,rp)
 	return not Duel.IsPlayerAffectedByEffect(tp,9980121)
