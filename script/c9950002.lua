@@ -35,8 +35,7 @@ function c9950002.desfilter(c)
 end
 function c9950002.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c9950002.desfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil) end
-	local g=Duel.SelectTarget(tp,c9950002.desfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,g:GetCount(),0,0)
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,nil,1,0,0)
 end
 function c9950002.activate(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
