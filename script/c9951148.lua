@@ -63,7 +63,7 @@ function c9951148.initial_effect(c)
 end
 function c9951148.sumsuc(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_MUSIC,0,aux.Stringid(9951148,0))
-Duel.Hint(HINT_SOUND,0,aux.Stringid(9951148,1)
+    Duel.Hint(HINT_SOUND,0,aux.Stringid(9951148,1))
 end
 function c9951148.ffilter(c)
 	return c:IsFusionType(TYPE_SYNCHRO+TYPE_XYZ+TYPE_FUSION+TYPE_LINK) and c:IsFusionSetCard(0x3bd2)

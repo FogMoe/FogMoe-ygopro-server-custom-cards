@@ -3,7 +3,7 @@ function c9951152.initial_effect(c)
 	 --pendulum summon
 	aux.EnablePendulumAttribute(c,false)
 	--synchro summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(nil),aux.NonTuner(Card.IsSetCard,0x3bd2),1)
+	aux.AddSynchroProcedure(c,nil,aux.NonTuner(Card.IsSetCard,0x3bd2),1)
 	c:EnableReviveLimit()
 --spsummon
 	local e6=Effect.CreateEffect(c)
