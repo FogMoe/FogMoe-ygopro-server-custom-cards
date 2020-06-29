@@ -49,7 +49,7 @@ function cm.descost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(g,REASON_COST)  
 end  
 function cm.descon(e,tp,eg,ep,ev,re,r,rp)  
-	return Duel.GetCurrentPhase()~=PHASE_DRAW  
+	return Duel.GetCurrentPhase()~=PHASE_DRAW and rp ~= tp 
 end  
 function cm.desfilter(c,tp)  
 	return c:IsControler(1-tp) and c:IsPreviousLocation(LOCATION_DECK)  
