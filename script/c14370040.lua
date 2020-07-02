@@ -50,7 +50,7 @@ function c14370040.tgop(e,tp,eg,ep,ev,re,r,rp)
 end
 --e1
 function c14370040.thfilter1(c)
-	return c:IsSetCard(0x1437) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)) and c:IsType(TYPE_CONTINUOUS) and c:IsAbleToHand()
+	return c:IsSetCard(0x1437) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)) and c:IsAbleToHand()
 end
 function c14370040.negcon(e,tp,eg,ep,ev,re,r,rp)
 	return rp==1-tp and not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and re:IsActiveType(TYPE_MONSTER) and Duel.IsChainNegatable(ev)
@@ -65,7 +65,7 @@ function c14370040.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function c14370040.negop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.NegateActivation(ev)~=0 then
-		local g=Duel.GetMatchingGroup(c14370040.thfilter1,tp,LOCATION_DECK+LOCATION_REMOVED,0,nil)
+		local g=Duel.GetMatchingGroup(c14370040.thfilter1,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,nil)
 		if g:GetCount()>0 and Duel.SelectYesNo(tp,aux.Stringid(14370040,2)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)

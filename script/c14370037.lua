@@ -1,7 +1,7 @@
 --灰 烬 皇  巴 巴 托 斯 
 function c14370037.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x1437),4,3,nil,nil,99)
+	aux.AddXyzProcedure(c,nil,5,3,c14370037.ovfilter,aux.Stringid(14370037,2))
 	c:EnableReviveLimit()
 	--immune
 	local e2=Effect.CreateEffect(c)
@@ -32,6 +32,10 @@ function c14370037.initial_effect(c)
 	e6:SetCost(c14370037.cost)
 	e6:SetOperation(c14370037.spop)
 	c:RegisterEffect(e6) 
+end
+--XYZ
+function c14370037.ovfilter(c)
+	return c:IsFaceup() and c:IsSetCard(0x1437) and c:IsRank(4) and c:IsType(TYPE_XYZ)
 end
 --e2
 function c14370037.immval(e,te)

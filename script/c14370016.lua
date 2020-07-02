@@ -54,7 +54,7 @@ function c14370016.splimit(e,c)
 end
 --e1
 function c14370016.spfilter(c,e,tp)
-	return (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)) and c:IsType(TYPE_CONTINUOUS) and c:IsSetCard(0x1437)
+	return (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)) and c:IsType(TYPE_CONTINUOUS) and c:IsSetCard(0x1438)
 		and Duel.IsPlayerCanSpecialSummonMonster(tp,c:GetCode(),0x1437,0x11,1500,2000,4,RACE_MACHINE,ATTRIBUTE_DARK,POS_FACEUP)
 end
 function c14370016.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -70,7 +70,7 @@ function c14370016.spop(e,tp,eg,ep,ev,re,r,rp)
 		local sg=g:Select(tp,1,1,nil)
 		local tg=sg:GetFirst()
 		if Duel.IsPlayerCanSpecialSummonMonster(tp,0,0x1437,0x11,1500,2000,4,RACE_MACHINE,ATTRIBUTE_DARK) then
-			tg:AddMonsterAttribute(TYPE_NORMAL+TYPE_TRAP)
+			tg:AddMonsterAttribute(TYPE_NORMAL)
 			Duel.SpecialSummon(tg,0,tp,tp,true,false,POS_FACEUP)
 		local e2=Effect.CreateEffect(e:GetHandler())
 		e2:SetType(EFFECT_TYPE_FIELD)

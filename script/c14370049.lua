@@ -81,7 +81,7 @@ function c14370049.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseSingleEvent(e:GetHandler(),EVENT_CUSTOM+14370049,e,0,tp,0,0)
 end
 function c14370049.spfilter1(c,e,tp)
-	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsLevelBelow(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_DARK) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c14370049.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_HAND+LOCATION_GRAVE) and chkc:IsControler(tp) and c14370049.spfilter1(chkc,e,tp) end
@@ -95,18 +95,6 @@ function c14370049.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP) then
-		tc:RegisterFlagEffect(14370049,RESET_EVENT+RESETS_STANDARD,0,1,fid)
-		local e3=Effect.CreateEffect(c)
-		e3:SetDescription(aux.Stringid(14370049,0))
-		e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		e3:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE)
-		e3:SetCode(EVENT_PHASE+PHASE_END)
-		e3:SetCountLimit(1)
-		e3:SetLabel(fid)
-		e3:SetLabelObject(tc)
-		e3:SetCondition(c14370049.tdcon)
-		e3:SetOperation(c14370049.tdop)
-		Duel.RegisterEffect(e3,tp)
 		local ea=Effect.CreateEffect(c)
 		ea:SetType(EFFECT_TYPE_SINGLE)
 		ea:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
@@ -126,17 +114,4 @@ function c14370049.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function c14370049.splimit(e,c)
 	return not c:IsAttribute(ATTRIBUTE_DARK)
-end
-function c14370049.tdcon(e,tp,eg,ep,ev,re,r,rp)
-	local tc=e:GetLabelObject()
-	if tc:GetFlagEffectLabel(14370049)==e:GetLabel() then
-		return true
-	else
-		e:Reset()
-		return false
-	end
-end
-function c14370049.tdop(e,tp,eg,ep,ev,re,r,rp)
-	local tc=e:GetLabelObject()
-	Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)
 end

@@ -26,10 +26,13 @@ function c14370001.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)
 	e2:SetCode(EFFECT_UPDATE_ATTACK)
 	e2:SetRange(LOCATION_FZONE)
-	e2:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+	e2:SetTargetRange(LOCATION_MZONE,0)
 	e2:SetTarget(aux.TargetBoolFunction(Card.IsSetCard,0x1437))
 	e2:SetValue(300)
 	c:RegisterEffect(e2)
+	local es=e2:Clone()
+	es:SetCode(EFFECT_UPDATE_DEFENSE)
+	c:RegisterEffect(es)
 	--indes
 	local e4=Effect.CreateEffect(c)
 	e4:SetType(EFFECT_TYPE_FIELD)
@@ -52,7 +55,7 @@ function c14370001.initial_effect(c)
 end
 --e4
 function c14370001.indtg2(e,c)
-	return c:IsSummonType(SUMMON_TYPE_ADVANCE) and c:IsSetCard(0x1437)
+	return c:IsSetCard(0x1437)
 end
 function c14370001.indct2(e,re,r,rp)
 	if bit.band(r,REASON_BATTLE)~=0 then
@@ -67,11 +70,11 @@ function c14370001.efilter(e,ct)
 end
 --e3
 function c14370001.indtg(e,c)
-	return c:IsSetCard(0x1437) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP))
+	return c:IsSetCard(0x1437) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)) and c:IsType(TYPE_CONTINUOUS)
 end
 --e5
 function c14370001.costfilter(c)
-	return c:IsSetCard(0x1437) and (c:IsFaceup() or not c:IsLocation(LOCATION_ONFIELD)) and c:IsAbleToGraveAsCost()
+	return (c:IsFaceup() or not c:IsLocation(LOCATION_ONFIELD)) and c:IsAbleToGraveAsCost()
 end
 function c14370001.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c14370001.costfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,e:GetHandler()) end

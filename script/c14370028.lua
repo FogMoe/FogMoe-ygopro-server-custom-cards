@@ -71,14 +71,14 @@ function c14370028.filter(c)
 	return c:IsFaceup() and c:IsSetCard(0x1437) and not c:IsSetCard(0x1438)
 end
 function c14370028.thfilter1(c)
-	return c:IsSetCard(0x1437) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)) and c:IsType(TYPE_CONTINUOUS) and c:IsAbleToHand()
+	return c:IsSetCard(0x1437) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)) and c:IsAbleToHand()
 end
 function c14370028.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0
 		or not Duel.IsPlayerCanSpecialSummonMonster(tp,14370028,0x1437,0x11,1500,2000,4,RACE_MACHINE,ATTRIBUTE_DARK) then return end
-	c:AddMonsterAttribute(TYPE_NORMAL+TYPE_SPELL)
+	c:AddMonsterAttribute(TYPE_NORMAL)
 	if Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)~=0
 		and Duel.IsExistingMatchingCard(c14370028.filter,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingMatchingCard(c14370028.thfilter1,tp,LOCATION_DECK,0,1,nil)

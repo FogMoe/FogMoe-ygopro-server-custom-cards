@@ -56,7 +56,7 @@ function c14370007.filter1(c,tp)
 		or Duel.IsExistingMatchingCard(c14370007.filter2,tp,LOCATION_DECK,0,1,c))
 end
 function c14370007.filter2(c)
-	return c:IsSetCard(0x1437) and (c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL))  and c:IsType(TYPE_CONTINUOUS) and c:IsSSetable()
+	return c:IsSetCard(0x1437) and (c:IsType(TYPE_TRAP) or c:IsType(TYPE_SPELL)) and c:IsType(TYPE_CONTINUOUS)  and c:IsSSetable()
 end
 function c14370007.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)

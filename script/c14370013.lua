@@ -51,12 +51,12 @@ function c14370013.tgfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_XYZ)
 end
 function c14370013.matfilter(c)
-	return (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP))and c:IsType(TYPE_CONTINUOUS) and c:IsSetCard(0x1437) and c:IsCanOverlay()
+	return (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)) and c:IsSetCard(0x1437) and c:IsCanOverlay()
 end
 function c14370013.xyztg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and c14370013.tgfilter(chkc) end
 	if chk==0 then return Duel.IsExistingTarget(c14370013.tgfilter,tp,LOCATION_MZONE,0,1,nil)
-		and Duel.IsExistingMatchingCard(c14370013.matfilter,tp,LOCATION_DECK,0,1,nil) end
+		and Duel.IsExistingMatchingCard(c14370013.matfilter,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,c14370013.tgfilter,tp,LOCATION_MZONE,0,1,1,nil)
 end
@@ -64,7 +64,7 @@ function c14370013.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-		local g=Duel.SelectMatchingCard(tp,c14370013.matfilter,tp,LOCATION_DECK,0,1,2,nil)
+		local g=Duel.SelectMatchingCard(tp,c14370013.matfilter,tp,LOCATION_DECK+LOCATION_HAND,0,1,2,nil)
 		if g:GetCount()>0 then
 			Duel.Overlay(tc,g)
 		local e2=Effect.CreateEffect(e:GetHandler())
