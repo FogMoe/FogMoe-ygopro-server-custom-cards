@@ -13,8 +13,8 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupEx(tp,Card.IsReleasable,2,nil) end
-	local g=Duel.SelectReleaseGroupEx(tp,Card.IsReleasable,2,2,nil)
+	if chk==0 then return Duel.CheckReleaseGroupEx(tp,Card.IsReleasable,1,nil) end
+	local g=Duel.SelectReleaseGroupEx(tp,Card.IsReleasable,1,1,nil)
 	Duel.Release(g,REASON_COST)
 end
 function cm.filter(c)
