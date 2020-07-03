@@ -17,9 +17,9 @@ function cm.filter(c)
 	return c:IsLocation(LOCATION_MZONE+LOCATION_HAND) and c:IsReleasable() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0x9400)
 end
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupEx(tp,cm.filter,2,nil) end
+	if chk==0 then return Duel.CheckReleaseGroupEx(tp,cm.filter,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local g1=Duel.SelectMatchingCard(tp,cm.filter,tp,LOCATION_MZONE+LOCATION_HAND,0,2,2,nil,tp)
+	local g1=Duel.SelectMatchingCard(tp,cm.filter,tp,LOCATION_MZONE+LOCATION_HAND,0,1,1,nil,tp)
 	Duel.Release(g1,REASON_COST) 
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -27,13 +27,13 @@ function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(2)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
-	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,2000)
+	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,200)
 end
 function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Draw(p,d,REASON_EFFECT)
-	if Duel.Recover(tp,2000,REASON_EFFECT) then
+	if Duel.Recover(tp,200,REASON_EFFECT) then
 	Duel.BreakEffect()
 	if c:IsRelateToEffect(e) then 
 	   c:CancelToGrave()

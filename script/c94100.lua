@@ -75,7 +75,7 @@ function cm.drop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function cm.chainop(e,tp,eg,ep,ev,re,r,rp)
-	if re:GetHandler():IsSetCard(0x9400) and re:IsActiveType(TYPE_SPELL) and ep==tp then
+	if re:GetHandler():IsSetCard(0x9400) and re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and ep==tp then
 		Duel.SetChainLimit(cm.chainlm)
 	end
 end

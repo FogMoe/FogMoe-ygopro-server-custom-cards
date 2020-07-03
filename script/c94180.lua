@@ -18,7 +18,7 @@ function cm.chcon(e,tp,eg,ep,ev,re,r,rp)
 	return re:IsActiveType(TYPE_SPELL+TYPE_TRAP) and rp==1-tp
 end
 function cm.chtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroup(tp,cm.cfilter,1,nil) end
+	if chk==0 then return Duel.CheckReleaseGroupEx(tp,cm.cfilter,1,nil) end
 end
 function cm.chop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Group.CreateGroup()
@@ -26,6 +26,6 @@ function cm.chop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.ChangeChainOperation(ev,cm.repop)
 end
 function cm.repop(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.SelectReleaseGroup(1-tp,cm.cfilter,1,1,nil)
+	local g=Duel.SelectReleaseGroupEx(1-tp,cm.cfilter,1,1,nil)
 	Duel.Release(g,REASON_EFFECT)
 end
