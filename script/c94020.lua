@@ -3,7 +3,7 @@ local cm=_G["c"..m]
 cm.name="贤者之石"
 function cm.initial_effect(c)
 	c:SetUniqueOnField(1,0,94020)
-	c:EnableCounterPermit(0x9403)
+	c:EnableCounterPermit(0xa95)
 	--Activate
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_COUNTER)
@@ -31,11 +31,12 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e3)
 	--to hand
 	local e5=Effect.CreateEffect(c)
-	e5:SetDescription(aux.Stringid(94243005,0))
+	e5:SetDescription(aux.Stringid(m,0))
 	e5:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_SZONE)
 	e5:SetTarget(c94020.thtg)
+	e5:SetCountLimit(1)
 	e5:SetOperation(c94020.thop)
 	c:RegisterEffect(e5)
 	--des
@@ -49,13 +50,13 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e6)
 end
 function c94020.filter(c)
-	return c:IsFaceup() and c:IsCanAddCounter(0x9403,1) and c:IsCode(94020)
+	return c:IsFaceup() and c:IsCanAddCounter(0xa95,1) and c:IsCode(94020)
 end
 function c94020.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and c94020.filter(chkc) end
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsCanAddCounter(tp,0x9403,1,c) end
-	c:AddCounter(0x9403,1)
+	if chk==0 then return Duel.IsCanAddCounter(tp,0xa95,1,c) end
+	c:AddCounter(0xa95,1)
 end
 function c94020.cfilter(c,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsPreviousLocation(LOCATION_MZONE+LOCATION_HAND) and c:GetPreviousControler()==tp and c:IsSetCard(0x9400)
@@ -76,12 +77,12 @@ end
 function c94020.counter(e,tp,eg,ep,ev,re,r,rp)
 	local ct=eg:GetCount()
 	if ct>0 then
-		e:GetHandler():AddCounter(0x9403,ct,true)
+		e:GetHandler():AddCounter(0xa95,ct,true)
 	end
 end
 function c94020.thfilter1(c,tp)
 	local lv=c:GetLevel()
-	return c:IsLocation(LOCATION_DECK+LOCATION_GRAVE) and lv>0 and c:IsAbleToHand()and Duel.IsCanRemoveCounter(tp,1,0,0x9403,lv,REASON_COST) and c:IsSetCard(0x9400)
+	return c:IsLocation(LOCATION_DECK+LOCATION_GRAVE) and lv>0 and c:IsAbleToHand()and Duel.IsCanRemoveCounter(tp,1,0,0xa95,lv,REASON_COST) and c:IsSetCard(0x9400)
 end
 function c94020.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c94020.thfilter1,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil,tp) end
@@ -100,7 +101,7 @@ function c94020.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	lvt[pc]=nil
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(m,1))
 	local lv=Duel.AnnounceNumber(tp,table.unpack(lvt))
-	Duel.RemoveCounter(tp,1,0,0x9403,lv,REASON_COST)
+	Duel.RemoveCounter(tp,1,0,0xa95,lv,REASON_COST)
 	e:SetLabel(lv)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK+LOCATION_GRAVE)
 end
@@ -118,5 +119,5 @@ function c94020.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c94020.indcon(e)
-	return e:GetHandler():GetCounter(0x9403)>0
+	return e:GetHandler():GetCounter(0xa95)>0
 end
