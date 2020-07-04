@@ -2,7 +2,7 @@ local m=94030
 local cm=_G["c"..m]
 cm.name="真理"
 function cm.initial_effect(c)
-	c:EnableCounterPermit(0x9400,LOCATION_SZONE)
+	c:EnableCounterPermit(0x9404,LOCATION_SZONE)
 		--Activate
 	local e9=Effect.CreateEffect(c)
 	e9:SetType(EFFECT_TYPE_ACTIVATE)
@@ -15,6 +15,7 @@ function cm.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_SZONE)
+	e1:SetCountLimit(1,94030)
 	e1:SetCondition(aux.dscon)
 	e1:SetTarget(cm.target1)
 	e1:SetCost(cm.cost1)
@@ -26,6 +27,7 @@ function cm.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_SZONE)
+	e2:SetCountLimit(1,94031)
 	e2:SetCondition(aux.dscon)
 	e2:SetTarget(cm.target1)
 	e2:SetCost(cm.cost1)
@@ -38,6 +40,7 @@ function cm.initial_effect(c)
 	e3:SetType(EFFECT_TYPE_IGNITION)
 	e3:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e3:SetRange(LOCATION_SZONE)
+	e3:SetCountLimit(1,94032)
 	e3:SetCondition(aux.dscon)
 	e3:SetTarget(cm.target3)
 	e3:SetCost(cm.cost1)
@@ -49,6 +52,7 @@ function cm.initial_effect(c)
 	e4:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_SZONE)
+	e4:SetCountLimit(1,94033)
 	e4:SetCost(cm.cost4)
 	e4:SetTarget(cm.target4)
 	e4:SetOperation(cm.activate4)
@@ -82,8 +86,8 @@ function cm.activate4(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function cm.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x9400,1,REASON_COST) end
-	e:GetHandler():RemoveCounter(tp,0x9400,1,REASON_COST)
+	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0x9404,1,REASON_COST) end
+	e:GetHandler():RemoveCounter(tp,0x9404,1,REASON_COST)
 end
 function cm.target1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsSetCard(0x9400) end

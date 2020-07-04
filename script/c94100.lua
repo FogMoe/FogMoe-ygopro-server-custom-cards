@@ -36,9 +36,18 @@ function cm.initial_effect(c)
 	e4:SetTarget(cm.rettg)
 	e4:SetOperation(cm.retop)
 	c:RegisterEffect(e4)
+	--destroy replace
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e5:SetCode(EFFECT_DESTROY_REPLACE)
+	e5:SetRange(LOCATION_FZONE)
+	e5:SetTarget(cm.reptg)
+	e5:SetValue(cm.repval)
+	e5:SetOperation(cm.repop)
+	c:RegisterEffect(e5)
 end
 function cm.retcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsReason(REASON_DESTROY) and e:GetHandler():GetReasonPlayer()==1-tp
+	return e:GetHandler():IsReason(REASON_DESTROY) 
 		and e:GetHandler():GetPreviousControler()==tp
 end
 function cm.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -81,4 +90,18 @@ function cm.chainop(e,tp,eg,ep,ev,re,r,rp)
 end
 function cm.chainlm(e,rp,tp)
 	return tp==rp
+end
+function cm.repfilter(c,tp)
+	return c:IsFaceup() and c:IsSetCard(0x9400) and c:IsType(TYPE_MONSTER)
+		and c:IsOnField() and c:IsControler(tp) and c:IsReason(REASON_EFFECT+REASON_BATTLE) and not c:IsReason(REASON_REPLACE)
+end
+function cm.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return e:GetHandler():IsDestructable() and eg:IsExists(cm.repfilter,1,nil,tp) end
+	return Duel.SelectEffectYesNo(tp,e:GetHandler(),96)
+end
+function cm.repval(e,c)
+	return cm.repfilter(c,e:GetHandlerPlayer())
+end
+function cm.repop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Destroy(e:GetHandler(),REASON_EFFECT)
 end
