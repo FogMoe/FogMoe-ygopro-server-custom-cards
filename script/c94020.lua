@@ -4,7 +4,6 @@ cm.name="贤者之石"
 function cm.initial_effect(c)
 	c:SetUniqueOnField(1,0,94020)
 	c:EnableCounterPermit(0x9403)
-	c:SetCounterLimit(0x9403,99)
 	--Activate
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_COUNTER)
