@@ -48,9 +48,9 @@ function c8709002.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function c8709002.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToDeckAsCost() and Duel.CheckLPCost(tp,500) end
+	if chk==0 then return e:GetHandler():IsAbleToDeckAsCost() and Duel.CheckLPCost(tp,1000) end
 	Duel.SendtoDeck(e:GetHandler(),nil,2,REASON_COST)
-	Duel.PayLPCost(tp,500)
+	Duel.PayLPCost(tp,1000)
 end
 function c8709002.filter(c)
 	return c:IsSetCard(0xafa) and c:IsType(TYPE_MONSTER) and not c:IsForbidden()

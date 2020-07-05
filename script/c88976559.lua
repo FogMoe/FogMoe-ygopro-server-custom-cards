@@ -73,6 +73,6 @@ function c88976559.aclimit(e,re,tp)
 	local loc=re:GetActivateLocation()
 	return (loc==LOCATION_GRAVE or loc==LOCATION_REMOVED) and re:IsActiveType(TYPE_MONSTER+TYPE_SPELL+TYPE_TRAP)
 end
-function c88976559.efilter(e,re)
-	return re:IsActiveType(TYPE_MONSTER+TYPE_SPELL+TYPE_TRAP)
+function c88976559.efilter(e,te)
+	return te:GetOwner()~=e:GetOwner()
 end
