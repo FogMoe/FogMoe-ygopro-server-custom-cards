@@ -24,11 +24,11 @@ function c94010.thfilter(c,tp)
 	return c:IsCode(94030)
 end
 function c94010.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupEx(tp,c94010.spfilter1,3,nil) end
+	if chk==0 then return Duel.CheckReleaseGroupEx(tp,c94010.spfilter1,2,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local g1=Duel.SelectMatchingCard(tp,c94010.spfilter2,tp,LOCATION_MZONE+LOCATION_HAND,0,1,3,nil,tp)
+	local g1=Duel.SelectMatchingCard(tp,c94010.spfilter2,tp,LOCATION_MZONE+LOCATION_HAND,0,1,2,nil,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local g2=Duel.SelectMatchingCard(tp,c94010.spfilter1,tp,LOCATION_MZONE+LOCATION_HAND,0,3-g1:GetCount(),3-g1:GetCount(),g1)
+	local g2=Duel.SelectMatchingCard(tp,c94010.spfilter1,tp,LOCATION_MZONE+LOCATION_HAND,0,2-g1:GetCount(),2-g1:GetCount(),g1)
 	g1:Merge(g2)
 	Duel.Release(g1,REASON_COST) 
 end
@@ -36,7 +36,7 @@ function c94010.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c94010.thfilter,tp,LOCATION_DECK,0,1,nil,tp) end
 end
 function c94010.spcon(e,tp)
-	return Duel.GetLocationCount(tp,LOCATION_SZONE)>1 and Duel.IsExistingMatchingCard(c94010.spfilter2,tp,LOCATION_MZONE+LOCATION_HAND,0,1,c) and Duel.CheckReleaseGroupEx(tp,c94010.spfilter1,3,nil) 
+	return Duel.GetLocationCount(tp,LOCATION_SZONE)>1 and Duel.IsExistingMatchingCard(c94010.spfilter2,tp,LOCATION_MZONE+LOCATION_HAND,0,1,c) and Duel.CheckReleaseGroupEx(tp,c94010.spfilter1,2,nil) 
 end
 function c94010.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_OPERATECARD)

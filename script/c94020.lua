@@ -36,7 +36,6 @@ function cm.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_IGNITION)
 	e5:SetRange(LOCATION_SZONE)
 	e5:SetTarget(c94020.thtg)
-	e5:SetCountLimit(1)
 	e5:SetOperation(c94020.thop)
 	c:RegisterEffect(e5)
 	--des

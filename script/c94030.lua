@@ -84,16 +84,18 @@ function cm.activate4(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-
+function cm.filtermust(c)
+	return c:IsLocation(LOCATION_MZONE) and c:IsFaceup() and c:IsSetCard(0x9400)
+end
 function cm.cost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanRemoveCounter(tp,0xa94,1,REASON_COST) end
 	e:GetHandler():RemoveCounter(tp,0xa94,1,REASON_COST)
 end
 function cm.target1(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsSetCard(0x9400) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(cm.filtermust,tp,LOCATION_MZONE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.SelectTarget(tp,cm.filtermust,tp,LOCATION_MZONE,0,1,1,nil)
 end
 function cm.activate1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
@@ -102,12 +104,12 @@ function cm.activate1(e,tp,eg,ep,ev,re,r,rp)
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)
-		e1:SetValue(3000)
+		e1:SetValue(2000)
 		tc:RegisterEffect(e1)
 		local e3=Effect.CreateEffect(c)
 		e3:SetType(EFFECT_TYPE_SINGLE)
 		e3:SetCode(EFFECT_UPDATE_DEFENSE)
-		e3:SetValue(3000)
+		e3:SetValue(2000)
 		tc:RegisterEffect(e3)
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
@@ -148,17 +150,17 @@ function cm.negop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function cm.filter3(c,e,tp)
-	return Duel.IsExistingMatchingCard(cm.filter33,tp,LOCATION_GRAVE,0,1,c,e,tp) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cm.filter33(c,e,tp)
 	return c:IsSetCard(0x9400) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cm.target3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsFaceup() and chkc:IsSetCard(0x9400) end
-	if chk==0 then return Duel.IsExistingTarget(Card.IsFaceup,tp,LOCATION_MZONE,0,1,nil) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
+	if chk==0 then return Duel.IsExistingTarget(cm.filtermust,tp,LOCATION_MZONE,0,1,nil) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 
 		and Duel.IsExistingMatchingCard(cm.filter3,tp,LOCATION_GRAVE,0,1,nil,e,tp)end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
-	Duel.SelectTarget(tp,Card.IsFaceup,tp,LOCATION_MZONE,0,1,1,nil)
+	Duel.SelectTarget(tp,cm.filtermust,tp,LOCATION_MZONE,0,1,1,nil)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
 end
 function cm.activate3(e,tp,eg,ep,ev,re,r,rp)
