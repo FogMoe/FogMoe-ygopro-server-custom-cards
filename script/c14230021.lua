@@ -31,7 +31,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function cm.cfilter(c)
-	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x58f) and c:IsDiscardable()
+	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x5aaf) and c:IsDiscardable()
 end
 function cm.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

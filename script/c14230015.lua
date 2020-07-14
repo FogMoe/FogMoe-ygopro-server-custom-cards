@@ -26,7 +26,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function cm.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x58f) and not c:IsCode(m)
+	return c:IsFaceup() and c:IsSetCard(0x5aaf) and not c:IsCode(m)
 end
 function cm.spcon1(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_MZONE,0,1,nil)
@@ -42,7 +42,7 @@ function cm.spop1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
 function cm.filter(c,e,tp)
-	return c:IsLevel(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsSetCard(0x58f)
+	return c:IsLevel(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsSetCard(0x5aaf)
 end
 function cm.tg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

@@ -31,7 +31,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function cm.cfilter(c,tp)
-	return c:IsFaceup() and c:IsSetCard(0x58f) and c:IsLocation(LOCATION_EXTRA) and c:GetSummonPlayer()==tp
+	return c:IsFaceup() and c:IsSetCard(0x5aaf) and c:GetSummonPlayer()==tp
 end
 function cm.descon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(cm.cfilter,1,nil,tp)
@@ -55,7 +55,7 @@ function cm.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return c:IsPreviousLocation(LOCATION_ONFIELD)
 end
 function cm.spfilter(c,e,tp)
-	return c:IsSetCard(0x58f) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(0x5aaf) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

@@ -33,7 +33,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function cm.mfilter(c)
-	return c:IsLevelBelow(4) and c:IsLinkSetCard(0x58f)
+	return c:IsLinkSetCard(0x5aaf)
 end
 function cm.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
@@ -52,7 +52,7 @@ function cm.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return c:IsCode(m) and bit.band(sumtype,SUMMON_TYPE_LINK)==SUMMON_TYPE_LINK
 end
 function cm.thfilter(c)
-	return c:IsSetCard(0x58f) and c:IsType(TYPE_SPELL) and c:IsAbleToHand()
+	return c:IsSetCard(0x5aaf) and c:IsType(TYPE_SPELL) and c:IsAbleToHand()
 end
 function cm.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -67,7 +67,7 @@ function cm.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cm.cfilter(c,tp)
-	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsSetCard(0x58f) and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c)>0
+	return (c:IsLocation(LOCATION_HAND) or c:IsFaceup()) and c:IsSetCard(0x5aaf) and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c)>0
 end
 function cm.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false)

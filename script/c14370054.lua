@@ -53,19 +53,19 @@ function c14370054.addcount(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst()
 	while tc do
 		local pl=tc:GetPreviousLocation()
-		if pl==LOCATION_ONFIELD and tc:IsType(TYPE_MONSTER) or (TYPE_TRAPMONSTER) and tc:GetOriginalRace()==RACE_MACHINE then
+		if pl==LOCATION_ONFIELD and tc:IsType(TYPE_MONSTER) and tc:IsSetCard(0x1437) then
 			local p=tc:GetControler()
 			c14370054[p]=c14370054[p]+1
-		elseif pl==LOCATION_HAND and tc:IsType(TYPE_MONSTER) or (TYPE_TRAPMONSTER) and tc:GetOriginalRace()==RACE_MACHINE then
+		elseif pl==LOCATION_HAND and tc:IsType(TYPE_MONSTER) and tc:IsSetCard(0x1437) then
 			local p=tc:GetControler()
 			c14370054[p]=c14370054[p]+1
-		elseif pl==LOCATION_GRAVE and tc:IsType(TYPE_MONSTER) or (TYPE_TRAPMONSTER)  and tc:GetOriginalRace()==RACE_MACHINE then
+		elseif pl==LOCATION_GRAVE and tc:IsType(TYPE_MONSTER) and tc:IsSetCard(0x1437) then
 			local p=tc:GetControler()
 			c14370054[p]=c14370054[p]+1
-		elseif pl==LOCATION_REMOVED and tc:IsType(TYPE_MONSTER) or (TYPE_TRAPMONSTER)  and tc:GetOriginalRace()==RACE_MACHINE then
+		elseif pl==LOCATION_REMOVED and tc:IsType(TYPE_MONSTER) and tc:IsSetCard(0x1437) then
 			local p=tc:GetControler()
 			c14370054[p]=c14370054[p]+1
-		elseif pl==LOCATION_MZONE and tc:IsType(TYPE_MONSTER) or (TYPE_TRAPMONSTER)  and tc:GetOriginalRace()==RACE_MACHINE then
+		elseif pl==LOCATION_MZONE and tc:IsType(TYPE_MONSTER) and tc:IsSetCard(0x1437) then
 			local p=tc:GetPreviousControler()
 			c14370054[p]=c14370054[p]+1
 		end

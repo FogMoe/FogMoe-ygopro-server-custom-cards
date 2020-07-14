@@ -28,8 +28,8 @@ function c14370034.initial_effect(c)
 	eb:SetCode(EFFECT_UPDATE_ATTACK)
 	eb:SetRange(LOCATION_MZONE)
 	eb:SetCondition(c14370034.effcon)
-	eb:SetLabel(1)
-	eb:SetValue(c14370034.atkval)
+	eb:SetLabel(2)
+	eb:SetValue(2500)
 	c:RegisterEffect(eb)
 	local es=eb:Clone()
 	es:SetCode(EFFECT_UPDATE_DEFENSE)
@@ -88,7 +88,7 @@ function c14370034.initial_effect(c)
 	ec:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DAMAGE_CAL)
 	ec:SetCode(EVENT_CHAINING)
 	ec:SetRange(LOCATION_MZONE)
-	ec:SetLabel(2)
+	ec:SetLabel(1)
 	ec:SetCondition(c14370034.negcon)
 	ec:SetCost(c14370034.negcost)
 	ec:SetTarget(c14370034.negtg)
@@ -140,9 +140,6 @@ end
 --eb
 function c14370034.effcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetOverlayCount()>=e:GetLabel()
-end
-function c14370034.atkval(e,c)
-	return c:GetOverlayCount()*1000
 end
 --e2
 function c14370034.damcon(e,tp,eg,ep,ev,re,r,rp)

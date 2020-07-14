@@ -35,7 +35,7 @@ function cm.spcost1(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Release(e:GetHandler(),REASON_COST)
 end
 function cm.spfilter1(c,e,tp,ec)
-	return c:IsSetCard(0x58f) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(0x5aaf) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 		and Duel.GetLocationCountFromEx(tp,tp,ec,c,0x60)>0 and c:IsType(TYPE_LINK)
 end
 function cm.sptg1(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -50,7 +50,7 @@ function cm.spop1(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cm.cfilter2(c)
-	return c:IsFaceup() and c:IsSetCard(0x58f) and not c:IsCode(m)
+	return c:IsFaceup() and c:IsSetCard(0x5aaf) and not c:IsCode(m)
 end
 function cm.spcon2(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(cm.cfilter2,1,nil)

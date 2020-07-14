@@ -40,19 +40,19 @@ function cm.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,14230038,0x58f,0x4011,0,0,1,RACE_PSYCHO,ATTRIBUTE_LIGHT) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,14230038,0x5aaf,0x4011,0,0,1,RACE_PSYCHO,ATTRIBUTE_LIGHT) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
 end
 function cm.spop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e)
 		or Duel.GetLocationCount(tp,LOCATION_MZONE)<=0
-		or not Duel.IsPlayerCanSpecialSummonMonster(tp,14230038,0x58f,0x4011,0,0,1,RACE_PSYCHO,ATTRIBUTE_LIGHT) then return end
+		or not Duel.IsPlayerCanSpecialSummonMonster(tp,14230038,0x5aaf,0x4011,0,0,1,RACE_PSYCHO,ATTRIBUTE_LIGHT) then return end
 	local token=Duel.CreateToken(tp,14230038)
 	Duel.SpecialSummon(token,0,tp,tp,false,false,POS_FACEUP)
 end
 function cm.filter(c,e,sp)
-	return c:IsSetCard(0x58f) and c:IsCanBeSpecialSummoned(e,0,sp,false,false)
+	return c:IsSetCard(0x5aaf) and c:IsCanBeSpecialSummoned(e,0,sp,false,false)
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

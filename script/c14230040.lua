@@ -2,7 +2,7 @@ local m=14230040
 local cm=_G["c"..m]
 cm.name="聆海 金鱼姬"
 function cm.initial_effect(c)
-	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x58f),4,2)
+	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x5aaf),4,2)
 	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_DECKDES)
@@ -25,7 +25,7 @@ function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function cm.filter(c)
-	return c:IsSetCard(0x58f) and (c:IsAbleToHand() or c:IsAbleToGrave())
+	return c:IsSetCard(0x5aaf) and (c:IsAbleToHand() or c:IsAbleToGrave())
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.filter,tp,LOCATION_DECK,0,1,nil) end
