@@ -18,18 +18,18 @@ function c112027.thfilter(c)
 	return c:IsSetCard(0xa009) and c:IsType(TYPE_MONSTER) and c:IsAbleToGraveAsCost()
 end
 function c112027.lzcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c112013.thfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
-	local g=Duel.SelectMatchingCard(tp,c112013.thfilter,tp,LOCATION_HAND,0,1,1,e:GetHandler())
+	if chk==0 then return Duel.IsExistingMatchingCard(c112027.thfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end
+	local g=Duel.SelectMatchingCard(tp,c112027.thfilter,tp,LOCATION_HAND,0,1,1,e:GetHandler())
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function c112027.thfilter2(c,e,tp,zone)
-	return ((c:IsSetCard(0xa009) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_ATTACK,tp,zone and c:IsType(TYPE_MONSTER))) or (c:IsSetCard(0xa009) and c:IsType(TYPE_LINK) and c:IsLinkBelow(2) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_ATTACK,tp,zone))) and not c:IsCode(112019)
+	return c:IsSetCard(0xa009) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_ATTACK,tp,zone) and c:IsType(TYPE_MONSTER)
 end
 function c112027.lztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local zone=e:GetHandler():GetLinkedZone(tp)
-	if chk==0 then return Duel.IsExistingMatchingCard(c112013.thfilter2,tp,LOCATION_GRAVE,0,1,nil,e,tp,zone) and Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zone)>=1 end
+	if chk==0 then return Duel.IsExistingMatchingCard(c112027.thfilter2,tp,LOCATION_GRAVE,0,1,nil,e,tp,zone) and Duel.GetLocationCount(tp,LOCATION_MZONE,tp,LOCATION_REASON_TOFIELD,zone)>=1 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,c112013.thfilter2,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,zone)
+	local g=Duel.SelectMatchingCard(tp,c112027.thfilter2,tp,LOCATION_GRAVE,0,1,1,nil,e,tp,zone)
 	Duel.SetTargetCard(g)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,tp,LOCATION_GRAVE)
 end

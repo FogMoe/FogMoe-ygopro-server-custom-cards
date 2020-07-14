@@ -28,7 +28,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function cm.spfilter(c,e,tp)
-	return c:IsSetCard(0x58f) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(0x5aaf) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and cm.spfilter(chkc,e,tp) end
@@ -45,7 +45,7 @@ function cm.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cm.filter(c)
-	return c:IsFaceup() and c:IsLevelAbove(1) and c:IsSetCard(0x58f)
+	return c:IsFaceup() and c:IsLevelAbove(1) and c:IsSetCard(0x5aaf)
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and cm.filter(chkc) end

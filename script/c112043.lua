@@ -64,7 +64,7 @@ function c112043.spfilter(c,e,tp)
 end
 function c112043.distg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
-	if chk==0 then return Duel.IsExistingTarget(c112043.disfilter,tp,0,LOCATION_MZONE,1,nil) and Duel.IsExistingTarget(c112043.spfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil,e,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(c112043.disfilter,tp,0,LOCATION_MZONE,1,nil) and Duel.IsExistingTarget(c112043.spfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil,e,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local g2=Duel.SelectTarget(tp,c112043.spfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil,e,tp)
 	e:SetLabelObject(g2:GetFirst())

@@ -2,7 +2,7 @@ local m=14230016
 local cm=_G["c"..m]
 cm.name="缚骨 清姬"
 function cm.initial_effect(c)
-	aux.AddLinkProcedure(c,cm.matfilter,1,1)
+	aux.AddLinkProcedure(c,cm.mfilter,1,1)
 	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,0))
@@ -28,15 +28,15 @@ function cm.initial_effect(c)
 	e3:SetOperation(cm.thop)
 	c:RegisterEffect(e3)
 end
-function cm.cfilter(c,lg)
-	return c:IsType(TYPE_EFFECT) and lg:IsContains(c)
+function cm.mfilter(c)
+	return c:IsLinkSetCard(0x5aaf)
 end
 function cm.thcon(e,tp,eg,ep,ev,re,r,rp)
 	local lg=e:GetHandler():GetLinkedGroup()
 	return eg:IsExists(cm.cfilter,1,nil,lg)
 end
 function cm.thfilter(c)
-	return c:IsSetCard(0x58f) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsSetCard(0x5aaf) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function cm.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -51,10 +51,10 @@ function cm.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cm.matfilter(c)
-	return c:IsLevelBelow(2) and c:IsLinkSetCard(0x58f)
+	return c:IsLevelBelow(2) and c:IsLinkSetCard(0x5aaf)
 end
 function cm.cfilter(c,e,tp,zone)
-	return c:IsSetCard(0x58f) and c:IsType(TYPE_MONSTER) and Duel.GetMZoneCount(tp,c,tp,LOCATION_REASON_TOFIELD,zone)>0
+	return c:IsSetCard(0x5aaf) and c:IsType(TYPE_MONSTER) and Duel.GetMZoneCount(tp,c,tp,LOCATION_REASON_TOFIELD,zone)>0
 		and Duel.IsExistingTarget(cm.spfilter,tp,LOCATION_GRAVE,0,1,nil,e,tp,c)
 end
 function cm.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
@@ -66,7 +66,7 @@ function cm.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabelObject(g:GetFirst())
 end
 function cm.spfilter(c,e,tp,rc)
-	return c:IsSetCard(0x58f) and c:IsType(TYPE_MONSTER) and not c:IsOriginalCodeRule(rc:GetOriginalCodeRule()) 
+	return c:IsSetCard(0x5aaf) and c:IsType(TYPE_MONSTER) and not c:IsOriginalCodeRule(rc:GetOriginalCodeRule()) 
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

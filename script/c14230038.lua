@@ -56,7 +56,7 @@ function cm.initial_effect(c)
 end
 function cm.synlimit(e,c)
 	if not c then return false end
-	return not c:IsSetCard(0x58f)
+	return not c:IsSetCard(0x5aaf)
 end
 function cm.cfilter(c)
 	return c:IsFaceup()
