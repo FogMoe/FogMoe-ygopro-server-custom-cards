@@ -13,7 +13,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function cm.cfilter(c,tp)
-	return c:IsLocation(LOCATION_GRAVE) or c:IsLocation(LOCATION_REMOVE) and c:GetPreviousControler()==tp and c:IsReason(REASON_EFFECT)
+	return c:IsIsPreviousLocation(LOCATION_GRAVE) or c:IsIsPreviousLocation(LOCATION_REMOVE) and c:GetPreviousControler()==tp and c:IsReason(REASON_EFFECT)
 end
 function cm.condition(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(cm.cfilter,1,nil,tp)

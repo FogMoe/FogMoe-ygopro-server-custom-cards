@@ -50,8 +50,7 @@ function c112028.lzop(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.ConfirmCards(1-tp,tc)
 end
 function c112028.thfilter(c,e,tp)
-	return c:IsSetCard(0xa009) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLink(1) and (c:IsLocation(LOCATION_GRAVE) and Duel.GetMZoneCount(tp)>0
-			or c:IsLocation(LOCATION_EXTRA) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0)
+	return c:IsSetCard(0xa009) and c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLink(1)
 end
 function c112028.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsReleasable() end

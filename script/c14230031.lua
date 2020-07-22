@@ -16,9 +16,9 @@ function cm.rfilter(c,tp)
 end
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local rg=Duel.GetReleaseGroup(tp):Filter(cm.rfilter,nil,tp)
-	if chk==0 then return rg:CheckSubGroup(aux.mzctcheckrel,2,2,tp) end
+	if chk==0 then return rg:CheckSubGroup(nil,2,2,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
-	local g=rg:SelectSubGroup(tp,aux.mzctcheckrel,false,2,2,tp)
+	local g=rg:SelectSubGroup(tp,nil,false,2,2,tp)
 	Duel.Release(g,REASON_COST)
 end
 function cm.spfilter(c,tc,e,tp)
