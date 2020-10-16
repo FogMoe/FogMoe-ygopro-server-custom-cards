@@ -25,7 +25,7 @@ function cm.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return re:GetHandler()~=e:GetHandler()
 end  
 function cm.thfilter(c)  
-	return c:IsSetCard(0x4298) and not c:IsCode(m) and c:IsAbleToHand()  
+	return c:IsSetCard(0x9298) and not c:IsCode(m) and c:IsAbleToHand()  
 end  
 function cm.thtg(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.thfilter,tp,LOCATION_DECK,0,1,nil) end  

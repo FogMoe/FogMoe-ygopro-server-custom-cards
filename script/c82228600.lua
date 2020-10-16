@@ -52,10 +52,10 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e5)   
 end
 function cm.target(e,c)  
-	return c:IsSetCard(0x1298) and c:IsType(TYPE_XYZ) and c:GetControler()==e:GetHandler():GetControler()
+	return c:IsSetCard(0x2299) and c:IsType(TYPE_XYZ) and c:GetControler()==e:GetHandler():GetControler()
 end  
 function cm.drcon(e,tp,eg,ep,ev,re,r,rp)   
-	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsSetCard(0x1298)
+	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsSetCard(0x2299)
 end  
 function cm.drtg(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return true end  
@@ -68,7 +68,7 @@ function cm.drop(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Draw(p,d,REASON_EFFECT)  
 end  
 function cm.thfilter(c)  
-	return c:IsSetCard(0x1298) and c:IsAbleToDeck()  
+	return c:IsSetCard(0x2299) and c:IsAbleToDeck()  
 end  
 function cm.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)  
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and cm.thfilter(chkc) end  

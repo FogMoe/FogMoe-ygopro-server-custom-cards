@@ -25,7 +25,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cm.con(e,tp,eg,ep,ev,re,r,rp)  
-	return e:GetHandler():IsSetCard(0x1298)  
+	return e:GetHandler():IsSetCard(0x2299)  
 end  
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end  

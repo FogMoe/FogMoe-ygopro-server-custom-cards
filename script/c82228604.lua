@@ -30,7 +30,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e3)  
 end   
 function cm.con(e,tp,eg,ep,ev,re,r,rp)  
-	return e:GetHandler():IsSetCard(0x1298)  
+	return e:GetHandler():IsSetCard(0x2299)  
 end  
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end  
@@ -51,7 +51,7 @@ function cm.tdop(e,tp,eg,ep,ev,re,r,rp)
 	end  
 end  
 function cm.filter(c,e,tp)  
-	return c:IsSetCard(0x1298) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)  
+	return c:IsSetCard(0x2299) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)  
 end  
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0  

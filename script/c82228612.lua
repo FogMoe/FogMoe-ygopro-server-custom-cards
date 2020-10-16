@@ -31,7 +31,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2)  
 end  
 function cm.con(e,tp,eg,ep,ev,re,r,rp)  
-	return e:GetHandler():IsSetCard(0x1298)  
+	return e:GetHandler():IsSetCard(0x2299)  
 end  
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end  
@@ -39,7 +39,7 @@ function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)  
 end 
 function cm.filter(c)  
-	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable() 
+	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable() and not c:IsType(TYPE_FIELD) 
 end  
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)  
 	if chkc then return (chkc:IsOnField() or chkc:IsLocation(LOCATION_GRAVE)) and cm.filter(chkc) and chkc:IsControler(1-tp) end  
@@ -98,7 +98,7 @@ function cm.operation(e,tp,eg,ep,ev,re,r,rp)
 	end  
 end  
 function cm.cfilter(c)  
-	return c:IsFaceup() and c:IsSetCard(0x1298) and c:IsType(TYPE_XYZ)  
+	return c:IsFaceup() and c:IsSetCard(0x2299) and c:IsType(TYPE_XYZ)  
 end  
 function cm.discon(e,tp,eg,ep,ev,re,r,rp)   
 	return rp==1-tp and Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_MZONE,0,1,nil)  

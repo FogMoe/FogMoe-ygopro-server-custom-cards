@@ -28,7 +28,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e1) 
 end
 function cm.con(e,tp,eg,ep,ev,re,r,rp)  
-	return e:GetHandler():IsSetCard(0x1298)  
+	return e:GetHandler():IsSetCard(0x2299)  
 end  
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end  
@@ -49,7 +49,7 @@ function cm.op(e,tp,eg,ep,ev,re,r,rp)
 	end  
 end  
 function cm.filter(c,e,tp)  
-	return c:IsSetCard(0x1298) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE) and not c:IsType(TYPE_XYZ)
+	return c:IsSetCard(0x2299) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE) and not c:IsType(TYPE_XYZ)
 end  
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)  
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and cm.filter(chkc,e,tp) end  

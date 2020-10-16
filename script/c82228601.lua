@@ -36,7 +36,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e4)  
 end  
 function cm.con(e,tp,eg,ep,ev,re,r,rp)  
-	return e:GetHandler():IsSetCard(0x1298)  
+	return e:GetHandler():IsSetCard(0x2299)  
 end  
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end 
@@ -59,7 +59,7 @@ function cm.regop(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterFlagEffect(m,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)  
 end  
 function cm.thfilter(c)  
-	return c:IsSetCard(0x1298) and not c:IsCode(m) and c:IsAbleToHand()  
+	return c:IsSetCard(0x2299) and not c:IsCode(m) and c:IsAbleToHand()  
 end  
 function cm.thcon(e,tp,eg,ep,ev,re,r,rp)  
 	return e:GetHandler():GetFlagEffect(m)>0  

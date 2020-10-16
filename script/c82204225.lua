@@ -62,7 +62,7 @@ function cm.operation(e,tp,eg,ep,ev,re,r,rp)
 end
  
 function cm.thfilter(c)  
-	return c:IsSetCard(0x4298) and c:IsType(TYPE_MONSTER) and not c:IsCode(m) and c:IsAbleToHand() and c:IsFaceup()
+	return c:IsSetCard(0x9298) and c:IsType(TYPE_MONSTER) and not c:IsCode(m) and c:IsAbleToHand() and c:IsFaceup()
 end  
 function cm.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)  
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_REMOVED) and cm.thfilter(chkc) end  

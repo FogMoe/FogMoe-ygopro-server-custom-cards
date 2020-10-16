@@ -25,10 +25,10 @@ function cm.initial_effect(c)
 end  
   
 function cm.filter(c,e,tp)  
-	return c:IsSetCard(0x1298) and c:IsCanBeEffectTarget(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)  
+	return c:IsSetCard(0x2299) and c:IsCanBeEffectTarget(e) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)  
 end  
 function cm.xyzfilter(c,mg)  
-	return c:IsSetCard(0x1298) and c:IsXyzSummonable(mg,2,2)  
+	return c:IsSetCard(0x2299) and c:IsXyzSummonable(mg,2,2)  
 end  
 function cm.mfilter1(c,mg,exg)  
 	return mg:IsExists(cm.mfilter2,1,c,c,exg)  
@@ -82,7 +82,7 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 	end  
 end  
 function cm.repfilter(c,tp)  
-	return c:IsFaceup() and c:IsControler(tp) and c:IsReason(REASON_BATTLE) and c:IsSetCard(0x1298) 
+	return c:IsFaceup() and c:IsControler(tp) and c:IsReason(REASON_BATTLE) and c:IsSetCard(0x2299) 
 end  
 function cm.reptg(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return e:GetHandler():IsAbleToDeck() and eg:IsExists(cm.repfilter,1,nil,tp) end  

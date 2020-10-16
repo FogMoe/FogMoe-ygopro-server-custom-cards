@@ -13,7 +13,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e1)  
 end  
 function cm.filter(c,e,tp)  
-	return c:IsSetCard(0x1298) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)  
+	return c:IsSetCard(0x2299) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)  
 end  
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0  
@@ -40,5 +40,5 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)  
 end  
 function cm.splimit(e,c,sump,sumtype,sumpos,targetp,se)  
-	return not c:IsSetCard(0x1298)  
+	return not c:IsSetCard(0x2299)  
 end  

@@ -18,17 +18,17 @@ function cm.initial_effect(c)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetHintTiming(TIMING_DRAW_PHASE)
 	e2:SetRange(LOCATION_GRAVE)  
-	e2:SetCountLimit(1,m)	
+	e2:SetCountLimit(1,m)   
 	e2:SetCost(cm.thcost)  
 	e2:SetTarget(cm.thtg)  
 	e2:SetOperation(cm.thop)  
 	c:RegisterEffect(e2)   
 end
 function cm.tgfilter(c)  
-	return c:IsFaceup() and c:IsType(TYPE_XYZ) and c:IsSetCard(0x1298)  
+	return c:IsFaceup() and c:IsType(TYPE_XYZ) and c:IsSetCard(0x2299)  
 end  
 function cm.matfilter(c)  
-	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x1298)  
+	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x2299)  
 end  
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)  
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and cm.tgfilter(chkc) end  
@@ -52,7 +52,7 @@ function cm.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoDeck(e:GetHandler(),nil,2,REASON_COST)  
 end  
 function cm.thfilter(c)  
-	return c:IsSetCard(0x1298) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()  
+	return c:IsSetCard(0x2299) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()  
 end  
 function cm.thtg(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.thfilter,tp,LOCATION_DECK,0,1,nil) end  

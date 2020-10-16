@@ -29,7 +29,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2) 
 end
 function cm.con(e,tp,eg,ep,ev,re,r,rp)  
-	return e:GetHandler():IsSetCard(0x1298)  
+	return e:GetHandler():IsSetCard(0x2299)  
 end  
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end  
@@ -48,7 +48,7 @@ function cm.hdop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SendtoGrave(sg,REASON_EFFECT)  
 end  
 function cm.cfilter(c)  
-	return c:IsSetCard(0x1298) and c:IsDiscardable()  
+	return c:IsSetCard(0x2299) and c:IsDiscardable()  
 end  
 function cm.descost(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_HAND,0,1,nil) end  

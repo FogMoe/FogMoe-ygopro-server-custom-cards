@@ -36,7 +36,7 @@ function cm.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.DiscardHand(tp,Card.IsDiscardable,1,1,REASON_DISCARD+REASON_COST,nil)  
 end  
 function cm.thfilter(c)  
-	return c:IsSetCard(0x1298) and c:IsAbleToHand() and not c:IsCode(m)
+	return c:IsSetCard(0x2299) and c:IsAbleToHand() and not c:IsCode(m)
 end  
 function cm.thtg(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.thfilter,tp,LOCATION_DECK,0,1,nil) end  

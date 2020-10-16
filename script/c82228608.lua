@@ -25,7 +25,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function cm.tdfilter(c)  
-	return c:IsSetCard(0x1298) and c:IsAbleToDeck()  
+	return c:IsSetCard(0x2299) and c:IsAbleToDeck()  
 end  
 function cm.drtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)  
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and cm.tdfilter(chkc) end  
@@ -57,7 +57,7 @@ end
 function cm.negcon(e,tp,eg,ep,ev,re,r,rp)  
 	local c=e:GetHandler()  
 	local bc=c:GetBattleTarget()  
-	return c:IsSetCard(0x1298) and c:IsRelateToBattle() and bc and bc:GetControler()~=tp and bc:IsFaceup() and bc:IsRelateToBattle() and not (bc:GetAttack()==0 and bc:GetDefense()==0 and (bc:IsDisabled() or not bc:IsType(TYPE_EFFECT)))
+	return c:IsSetCard(0x2299) and c:IsRelateToBattle() and bc and bc:GetControler()~=tp and bc:IsFaceup() and bc:IsRelateToBattle() and not (bc:GetAttack()==0 and bc:GetDefense()==0 and (bc:IsDisabled() or not bc:IsType(TYPE_EFFECT)))
 end  
 function cm.negop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

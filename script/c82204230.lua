@@ -15,7 +15,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e1)  
 end
 function cm.tdfilter(c)  
-	return c:IsSetCard(0x4298) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeckAsCost()  
+	return c:IsSetCard(0x9298) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeckAsCost()  
 end  
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.tdfilter,tp,LOCATION_REMOVED,0,1,nil) end

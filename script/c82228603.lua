@@ -33,7 +33,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e3) 
 end
 function cm.descon(e)  
-	return not e:GetHandler():GetOverlayGroup():IsExists(Card.IsSetCard,1,nil,0x1298)  
+	return not e:GetHandler():GetOverlayGroup():IsExists(Card.IsSetCard,1,nil,0x2299)  
 end  
 function cm.efilter(e,te)  
 	return te:IsActiveType(TYPE_TRAP) and te:GetOwnerPlayer()~=e:GetHandlerPlayer()  
@@ -43,7 +43,7 @@ function cm.mtcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 end
 function cm.mtfilter(c)  
-	return c:IsSetCard(0x1298) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x2299) and c:IsType(TYPE_MONSTER)
 end  
 function cm.mttg(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return e:GetHandler():IsType(TYPE_XYZ)  

@@ -30,7 +30,7 @@ function cm.initial_effect(c)
 end
 function cm.atkcon(e,tp,eg,ep,ev,re,r,rp)  
 	local c=e:GetHandler()
-	return c:IsSetCard(0x1298) and Duel.IsAbleToEnterBP()  
+	return c:IsSetCard(0x2299) and Duel.IsAbleToEnterBP()  
 end  
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end  
@@ -54,7 +54,7 @@ function cm.atkop(e,tp,eg,ep,ev,re,r,rp)
 	end  
 end  
 function cm.filter(c)  
-	return c:IsSetCard(0x1298) and c:IsAbleToHand() and not c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x2299) and c:IsAbleToHand() and not c:IsType(TYPE_MONSTER)
 end  
 function cm.tg(e,tp,eg,ep,ev,re,r,rp,chk)  
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.filter,tp,LOCATION_DECK,0,1,nil) end  
@@ -78,5 +78,5 @@ function cm.op(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp) 
 end  
 function cm.splimit(e,c)  
-	return not c:IsSetCard(0x1298) and c:IsLocation(LOCATION_EXTRA)  
+	return not c:IsSetCard(0x2299) and c:IsLocation(LOCATION_EXTRA)  
 end  

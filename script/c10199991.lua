@@ -21,6 +21,8 @@ rsreset={}   --"Reset Function"
 rshint={}   --"Hint Function"
 rsloc={}	--"Location Function"
 
+rsdv="Divide_Variable"
+
 --Info Variable
 rsval.valinfo   ={} --"Value for inside series, inside type etc."
 rscost.costinfo ={} --"Cost information, for record cost value" 
@@ -57,20 +59,22 @@ rsreset.ered	=   RESET_EVENT+RESETS_REDIRECT
 
 --Code Variable 
 rscode.Extra_Effect_Activate   =   m+100   --"Attach Effect"
-rscode.Extra_Effect_BSolve   =   m+200 
-rscode.Extra_Effect_ASolve   =   m+800 
+rscode.Extra_Effect_BSolve   =   m+101 
+rscode.Extra_Effect_ASolve   =   m+102 
 
-rscode.Phase_Leave_Flag   =   m+300   --"Summon Flag for SummonBuff"
-rscode.Extra_Synchro_Material=  m+400 --"Extra Synchro Material"
-rscode.Extra_Xyz_Material   =   m+401 --"Extra Xyz Material" 
-rscode.Utility_Xyz_Material =   m+500 --"Utility Xyz Material" 
-rscode.Previous_Set_Code	=   m+600 --"Previous Set Code" 
-rscode.Synchro_Material =   m+700  --"Record synchro proceudre target"
-rscode.Pre_Complete_Proc = m+900 --"Previous c:CompleteProcedure" 
+rscode.Phase_Leave_Flag   =   m+200   --"Summon Flag for SummonBuff"
+rscode.Extra_Synchro_Material=  m+300 --"Extra Synchro Material"
+rscode.Extra_Xyz_Material   =   m+301 --"Extra Xyz Material" 
+rscode.Utility_Xyz_Material =   m+400 --"Utility Xyz Material" 
+rscode.Previous_Set_Code	=   m+500 --"Previous Set Code" 
+rscode.Synchro_Material =   m+600  --"Record synchro proceudre target"
+rscode.Pre_Complete_Proc = m+700 --"Previous c:CompleteProcedure" 
+
+rscode.Set  =   m+800   --"EVENT_SET"
 
 --Hint Message Variable
 rshint.act=aux.Stringid(m,0) --"activate spell/trap"
-rshint.dis=aux.Stringid(m,1) --"cards will be disable effects "
+rshint.dis=aux.Stringid(38265153,3) --"cards will be disable effects "
 rshint.ad=aux.Stringid(m,2)  --"cards will be change Atk/Def"
 rshint.rtg=aux.Stringid(48976825,0) --"return to grave"
 rshint.spproc=aux.Stringid(m,4) --"SS by self produce"
@@ -86,6 +90,22 @@ rshint.darksynchro=aux.Stringid(m,15) --"treat as dark synchro"
 rshint.choose=aux.Stringid(23912837,1) --"choose 1 effect"
 rshint.epleave=aux.Stringid(m,3)	--"end phase leave field"
 rshint.finshcopy=aux.Stringid(43387895,1) --"reset copy effect"
+rshint.act2=aux.Stringid(m,1)   --"select card to activate"
+rshint.tgct=aux.Stringid(83531441,2) --"select send to the GY number"
+rshint.drct=aux.Stringid(m,5) --"select draw number"
+
+--[[
+rshint.isss=aux.Stringid(17535764,1)	--"would you SS a monster?"
+rshint.istg=aux.Stringid(62834295,2)	--"would you send to GY?"
+rshint.isdes=aux.Stringid(20590515,2)   --"would you destroy?"
+rshint.istd=aux.Stringid(m,1)	--"would you send to Deck?"
+rshint.isrm=aux.Stringid(93191801,2)	--"would you reomve?"
+rshint.isset=aux.Stringid(m,5)  --"would you set?"
+rshint.istf=aux.Stringid(m,6)	--"would you place to field?"
+rshint.isth=aux.Stringid(26118970,1)	--"would you send to hand?"
+rshint.isrh=aux.Stringid(31102447,2)	--"would you return to hand"
+rshint.isdr=aux.Stringid(3679218,1)  --"would you draw?"
+--]]
 
 --Property Variable
 rsflag.flaglist =   { EFFECT_FLAG_CARD_TARGET,EFFECT_FLAG_PLAYER_TARGET,EFFECT_FLAG_DELAY,EFFECT_FLAG_DAMAGE_STEP,EFFECT_FLAG_DAMAGE_CAL,
@@ -125,6 +145,7 @@ rscf.exlist_rp  =   { TYPE_FUSION,TYPE_SYNCHRO,TYPE_XYZ,TYPE_LINK,TYPE_PENDULUM,
 
 --Location Variable
 rsloc.hd=LOCATION_HAND+LOCATION_DECK 
+rsloc.ho=LOCATION_HAND+LOCATION_ONFIELD
 rsloc.hg=LOCATION_HAND+LOCATION_GRAVE  
 rsloc.dg=LOCATION_DECK+LOCATION_GRAVE 
 rsloc.gr=LOCATION_GRAVE+LOCATION_REMOVED 
@@ -151,7 +172,8 @@ function rsof.Escape_Old_Functions()
 	rsof.SelectOption_Page= rsop.SelectOption_Page
 	rsof.SelectNumber=   rsop.AnnounceNumber
 	rsof.SelectNumber_List= rsop.AnnounceNumber_List
-	rsof.IsSet   =   rscf.DefineSet 
+	rsof.IsSet   =   rscf.DefineSet
+	rscf.GetRelationThisCard = rscf.GetFaceUpSelf
 	--some card use old SummonBuff's phase leave field parterment, must fix them in their luas
 	rssf.SummonBuff=function(attlist,isdis,isdistig,selfleave,phaseleave)
 		local bufflist={}
