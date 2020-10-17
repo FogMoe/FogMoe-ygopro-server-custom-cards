@@ -26,6 +26,7 @@ function cm.initial_effect(c)
 	e1:SetTarget(cm.thtg)
 	e1:SetOperation(cm.thop)
 	c:RegisterEffect(e1)
+	Duel.AddCustomActivityCounter(m,ACTIVITY_SPSUMMON,cm.counterfilter)
 	--draw
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(94120,1))
@@ -39,6 +40,12 @@ function cm.initial_effect(c)
 	e2:SetOperation(cm.drop)
 	c:RegisterEffect(e2)
 end
+function cm.counterfilter(c)
+	return c:IsSetCard(0x9400)
+end
+function cm.alllimit(e,c,sump,sumtype,sumpos,targetp,se)
+	return not c:IsSetCard(0x9400)
+end
 function cm.linkcon(e)
 	local c=e:GetHandler()
 	return c:IsStatus(STATUS_SPSUMMON_TURN) and c:IsSummonType(SUMMON_TYPE_LINK)
@@ -47,8 +54,16 @@ function cm.lcheck(g,lc)
 	return g:IsExists(Card.IsLinkSetCard,1,nil,0x9400)
 end
 function cm.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return true end
+	if chk==0 then return Duel.GetCustomActivityCount(m,tp,ACTIVITY_SPSUMMON)==0 end
 	Duel.Recover(tp,1500,REASON_COST)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
+	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetTargetRange(1,0)
+	e1:SetTarget(cm.alllimit)
+	Duel.RegisterEffect(e1,tp)
 end
 function cm.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)

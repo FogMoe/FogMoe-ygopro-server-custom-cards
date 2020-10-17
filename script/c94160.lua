@@ -48,20 +48,20 @@ function cm.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_LINK)
 end
 function cm.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=2 end
+	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>=1 end
 	Duel.SetTargetPlayer(tp)
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,2,0,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,0,LOCATION_DECK)
 end
 function cm.thfilter(c)
 	return c:IsAbleToHand()
 end
 function cm.thop(e,tp,eg,ep,ev,re,r,rp)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
-	Duel.ConfirmDecktop(p,2)
-	local g=Duel.GetDecktopGroup(p,2)
-	if g:GetCount()>0 and g:IsExists(cm.thfilter,2,nil) then
+	Duel.ConfirmDecktop(p,1)
+	local g=Duel.GetDecktopGroup(p,1)
+	if g:GetCount()>0 and g:IsExists(cm.thfilter,1,nil) then
 		Duel.Hint(HINT_SELECTMSG,p,HINTMSG_ATOHAND)
-		local sg=g:FilterSelect(p,cm.thfilter,2,2,nil)
+		local sg=g:FilterSelect(p,cm.thfilter,1,1,nil)
 		Duel.SendtoHand(sg,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-p,sg)
 		Duel.ShuffleHand(p)

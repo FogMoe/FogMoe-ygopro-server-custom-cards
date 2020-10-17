@@ -15,6 +15,7 @@ function cm.initial_effect(c)
 	e4:SetTarget(cm.negtg)
 	e4:SetOperation(cm.negop)
 	c:RegisterEffect(e4)
+	Duel.AddCustomActivityCounter(m,ACTIVITY_SPSUMMON,cm.counterfilter)
 	--remove
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(94080,1))
@@ -28,6 +29,12 @@ function cm.initial_effect(c)
 	e2:SetTarget(cm.rmtg)
 	e2:SetOperation(cm.rmop)
 	c:RegisterEffect(e2)
+end
+function cm.counterfilter(c)
+	return c:IsSetCard(0x9400)
+end
+function cm.alllimit(e,c,sump,sumtype,sumpos,targetp,se)
+	return not c:IsSetCard(0x9400)
 end
 function cm.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsDiscardable,tp,LOCATION_HAND,0,1,e:GetHandler()) end
@@ -92,9 +99,18 @@ function cm.cfilter(c)
 end
 
 function cm.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.CheckReleaseGroupEx(tp,cm.cfilter,1,nil) end
+	if chk==0 then return Duel.CheckReleaseGroupEx(tp,cm.cfilter,1,nil)
+		and Duel.GetCustomActivityCount(m,tp,ACTIVITY_SPSUMMON)==0 end
 	local g=Duel.SelectReleaseGroupEx(tp,cm.cfilter,1,1,nil)
 	Duel.Release(g,REASON_COST)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
+	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetTargetRange(1,0)
+	e1:SetTarget(cm.alllimit)
+	Duel.RegisterEffect(e1,tp)
 end
 function cm.negtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return aux.nbcon(tp,re) end
