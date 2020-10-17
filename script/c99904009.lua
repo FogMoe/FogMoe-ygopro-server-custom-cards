@@ -18,7 +18,7 @@ function c99904009.initial_effect(c)
 	--spsummon2
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(99904009,1))
-	e2:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DESTROY)
+	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
@@ -79,6 +79,9 @@ end
 function c99904009.filter2(c,e,tp)
 	return c:IsSetCard(0x343) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
+function c99904009.filter3(c)
+	return c:IsSetCard(0x343) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+end
 function c99904009.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(c99904009.filter2,tp,LOCATION_HAND,0,1,nil,e,tp) end
@@ -90,11 +93,15 @@ function c99904009.spop2(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.SelectMatchingCard(tp,c99904009.filter2,tp,LOCATION_HAND,0,1,1,nil,e,tp)
 	if g:GetCount()>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)
-		if Duel.IsPlayerCanDraw(tp,1)
+		local mg=Duel.GetMatchingGroup(aux.NecroValleyFilter(c99904009.filter3),tp,LOCATION_GRAVE,0,nil)
+		if mg:GetCount()>0
 			and Duel.GetMatchingGroupCount(Card.IsType,tp,LOCATION_ONFIELD,0,nil,TYPE_SPELL+TYPE_TRAP)>=2
 			and Duel.SelectYesNo(tp,aux.Stringid(99904009,2)) then
 			Duel.BreakEffect()
-			Duel.Draw(tp,1,REASON_EFFECT)
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
+			local sg=mg:Select(tp,1,1,nil)
+			Duel.SendtoHand(sg,nil,REASON_EFFECT)
+			Duel.ConfirmCards(1-tp,sg)
 		end
 	end
 end
