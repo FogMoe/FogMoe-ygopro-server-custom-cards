@@ -10,7 +10,6 @@ function cm.initial_effect(c)
 	e1:SetRange(LOCATION_DECK)
 	e1:SetCondition(cm.spcon)
 	e1:SetOperation(cm.spop)
-	e1:SetCost(cm.allcost)
 	e1:SetCountLimit(1,94050)
 	e1:SetValue(1)
 	c:RegisterEffect(e1)
@@ -41,17 +40,6 @@ end
 function cm.counterfilter(c)
 	return c:IsSetCard(0x9400)
 end
-function cm.allcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetCustomActivityCount(m,tp,ACTIVITY_SPSUMMON)==0 end
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
-	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	e1:SetTargetRange(1,0)
-	e1:SetTarget(cm.alllimit)
-	Duel.RegisterEffect(e1,tp)
-end
 function cm.alllimit(e,c,sump,sumtype,sumpos,targetp,se)
 	return not c:IsSetCard(0x9400)
 end
@@ -68,6 +56,7 @@ function cm.spcon(e,c)
 	local tp=c:GetControler()
 	return Duel.GetLocationCount(tp,LOCATION_MZONE)>-2
 		and Duel.IsExistingMatchingCard(cm.spfilter1,tp,LOCATION_MZONE+LOCATION_HAND,0,1,nil,tp)
+		and Duel.GetCustomActivityCount(m,tp,ACTIVITY_SPSUMMON)==0
 end
 function cm.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
@@ -76,6 +65,14 @@ function cm.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	local g2=Duel.SelectMatchingCard(tp,cm.spfilter1,tp,LOCATION_MZONE+LOCATION_HAND,0,1,1,g1:GetFirst())
 	g1:Merge(g2)
 	Duel.Release(g1,REASON_COST)
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
+	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	e1:SetTargetRange(1,0)
+	e1:SetTarget(cm.alllimit)
+	Duel.RegisterEffect(e1,tp)
 end
 
 function cm.indct(e,re,r,rp)
