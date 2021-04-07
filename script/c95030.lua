@@ -45,7 +45,7 @@ function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if Duel.NegateEffect(ev) and re:GetHandler():IsRelateToEffect(re)
+	if Duel.NegateEffect(ev)
 	then
 		Duel.BreakEffect()
 		c:CancelToGrave()
