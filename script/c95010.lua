@@ -35,7 +35,7 @@ function cm.splimit(e,c,sump,sumtype,sumpos,targetp,se)
 end
 
 function cm.tfilter(c,att,e,tp,tc)
-	if not (c:IsSetCard(0x9500) and c:IsAttribute(att) and c:IsType(TYPE_MONSTER)) then return false end
+	if not (c:IsSetCard(0x9500) and (not c:IsAttribute(att)) and c:IsType(TYPE_MONSTER)) then return false end
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	return c:IsAbleToHand() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,true,false))
 end
@@ -44,7 +44,7 @@ function cm.filter(c,e,tp)
 		and Duel.IsExistingMatchingCard(cm.tfilter,tp,LOCATION_DECK,0,1,nil,c:GetAttribute(),e,tp,c)
 end
 function cm.chkfilter(c,att)
-	return c:IsFaceup() and (c:GetAttribute()&att)==att
+	return c:IsFaceup() and (c:GetAttribute()&att)~=att
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and cm.chkfilter(chkc,e:GetLabel()) end

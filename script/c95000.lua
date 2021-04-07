@@ -14,7 +14,7 @@ function cm.initial_effect(c)
 	--tohand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(41940225,1))
-	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_TODECK)
+	e2:SetCategory(CATEGORY_TOHAND+CATEGORY_TODECK+CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCountLimit(1,95001)
@@ -51,13 +51,13 @@ function cm.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 
-function cm.cfilter(c)
-	return c:IsSetCard(0x9500) and c:IsType(TYPE_MONSTER) and not c:IsPublic()
+function cm.cfilter(c,e,tp,ft)
+	return c:IsSetCard(0x9500) and (c:IsAbleToDeck() or (ft>0 and c:IsCanBeSpecialSummoned(e,0,tp,false,false))) and c:IsType(TYPE_MONSTER) and not c:IsPublic()
 end
 function cm.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_HAND,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_HAND,0,1,nil,e,tp,ft) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_CONFIRM)
-	local g=Duel.SelectMatchingCard(tp,cm.cfilter,tp,LOCATION_HAND,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,cm.cfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp,ft)
 	Duel.ConfirmCards(1-tp,g)
 	Duel.ShuffleHand(tp)
 end
@@ -68,8 +68,20 @@ function cm.tg2(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cm.op2(e,tp,eg,ep,ev,re,r,rp)
 	if e:GetHandler():IsRelateToEffect(e) then
-		local gg=Duel.SelectMatchingCard(tp,cm.cfilter,tp,LOCATION_HAND,0,1,1,nil)
-		Duel.SendtoDeck(gg,nil,2,REASON_EFFECT)
+		local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
+		if Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_HAND,0,1,nil,e,tp,ft)  then			
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SELECT)
+			local g=Duel.SelectMatchingCard(tp,cm.cfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp,ft)
+			local sc=g:GetFirst()
+			if ft>0 and sc:IsCanBeSpecialSummoned(e,0,tp,false,false)
+				and (not sc:IsAbleToDeck() or Duel.SelectOption(tp,aux.Stringid(m,3),1152)==1) then
+				Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP)
+			else
+				Duel.HintSelection(g)
+				Duel.SendtoDeck(sc,nil,2,REASON_EFFECT)
+			end
+		end
+
 		Duel.SendtoHand(e:GetHandler(),nil,REASON_EFFECT)
 	end
 end
